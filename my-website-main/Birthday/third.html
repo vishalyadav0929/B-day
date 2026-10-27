@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #000;
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+      height: 100vh;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #ffeb3b;
+      text-shadow: 0 0 15px #ff4081;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .para {
+      opacity: 0;
+      transform: translateY(30px);
+      font-size: 1.3rem;
+      line-height: 1.8;
+      margin: 30px 0;
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      border-radius: 15px;
+      backdrop-filter: blur(5px);
+      transition: all 1s ease;
+    }
+
+    .para.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Gift Button */
+    .gift-btn {
+      margin-top: 30px;
+      padding: 15px 30px;
+      background: linear-gradient(45deg, #ff4081, #ffeb3b);
+      border: none;
+      border-radius: 30px;
+      color: #000;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .gift-btn:hover {
+      transform: scale(1.1);
+    }
+
+    /* Popup */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #111;
+      padding: 30px;
+      border-radius: 20px;
+      color: #fff;
+      box-shadow: 0 0 20px #ff4081;
+      z-index: 10;
+      animation: popin 0.5s ease;
+    }
+    @keyframes popin {
+      from { transform: translate(-50%, -50%) scale(0); }
+      to { transform: translate(-50%, -50%) scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="fireworks"></canvas>
+
+  <div class="container">
+    <h1> Happiestt B'day Rasmalaiiiii❤️🎉</h1>
+    <p class="para">I love your childish side, your mood swings, your random talks, your drama, and all those little things that make you you</p> 
+    <p class="para">You have this little way of making everything feel better without even trying</p> 
+    <p class="para">I don't even know how to explain what I'm feeling, but somehow, talking to you makes things a little easier.</p>
+    <p class="para">you're someone I can be my stupidest self with, someone who makes me smile for no reason, and someone whose presence can fix my mood in seconds.</p> 
+   <p class="para">yes, you're annoying too, but unfortunately, you're my favourite kind of annoying. 🤭💗</p>
+    <p class="para">I might not say it every day, but I genuinely care about you a lot.💕</p>
+    <p class="para"> I hope we never let those little things ruin what we have. </p>
+    <p class="para"> I don't know what the future holds, but I really hope you stay a part of my life for a long</p>
+    <p class="para">And listen, madam, don't ever think you're ordinary, okay?</p>
+    <p class="para">You're genuinely one of those people who make life a little more beautiful just by being in it.</p>
+    <p class="para">stop being so cute all the time, it's getting difficult to act normal around you. 🤭😭💗</p>
+
+    <button class="gift-btn" onclick="showPopup()">🎁 Open Surprise</button>
+  </div>
+
+  <!-- Popup -->
+<div class="popup" id="popup">
+  <h2>💝 Surprise! 💝</h2>
+  <p>You can always count on me, chahe kuch share karna ho ya bs quietly baithna ho. 🥹🤍 You deserve all the happiness, and I'll always be rooting for you. 💗✨
+And haan, itni easily mujhse jaan niii chhuda skte, you're stuck with me now. 🤭🫶🏻 Agr kbhi kuch bother kare, toh share kar liya karo merse. I might not be able to fix things, but I'll always be here for you, rasmalaiiiii. 😭💌 (I'm a little different bhyii, aur thoda zyada sensitive bhi. 😭🤌🏻💗)
+</p>
+
+  <!-- Birthday Video -->
+  <video width="300" controls autoplay loop style="margin-top:15px; border-radius:15px;">
+    <source src="video.mp4" type="video/mp4">
+ 
+  </video>
+</div>
+<audio id="myAudio" autoplay loop muted>
+  <source src="aud.mp3" type="audio/mp3">
+</audio>
+
+<script>
+// Audio element ko select karo
+var audio = document.getElementById("myAudio");
+
+// Try autoplay (muted ke saath hi chalega)
+audio.play().catch(function(err) {
+  console.log("Autoplay blocked:", err);
+});
+
+// Ek function jo unmute karke play karega
+function enableAudio() {
+  audio.muted = false; // Unmute
+  audio.play();
+}
+
+// Agar first user action pe audio enable karna ho toh:
+document.addEventListener("click", enableAudio, { once: true });
+document.addEventListener("keydown", enableAudio, { once: true });
+</script>
+
+  <script>
+    // Animate paragraphs
+    const paras = document.querySelectorAll('.para');
+    paras.forEach((p, i) => {
+      setTimeout(() => p.classList.add('show'), i * 2000);
+    });
+
+    // Popup
+    function showPopup() {
+      document.getElementById('popup').style.display = 'block';
+      for(let i=0; i<20; i++) {
+        createHeart();
+      }
+    }
+
+    // Heart Trail
+    document.addEventListener('mousemove', (e) => {
+      let heart = document.createElement("div");
+      heart.innerHTML = "💖";
+      heart.style.position = "absolute";
+      heart.style.left = e.pageX + "px";
+      heart.style.top = e.pageY + "px";
+      heart.style.fontSize = Math.random() * 20 + 10 + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => { heart.remove(); }, 1000);
+    });
+
+    // Fireworks
+    const canvas = document.getElementById("fireworks");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    class Firework {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.particles = [];
+        for (let i = 0; i < 50; i++) {
+          this.particles.push({
+            x: x,
+            y: y,
+            angle: Math.random() * 2 * Math.PI,
+            speed: Math.random() * 5 + 2,
+            life: 100
+          });
+        }
+      }
+      update() {
+        this.particles.forEach(p => {
+          p.x += Math.cos(p.angle) * p.speed;
+          p.y += Math.sin(p.angle) * p.speed;
+          p.life--;
+        });
+        this.particles = this.particles.filter(p => p.life > 0);
+      }
+      draw() {
+        this.particles.forEach(p => {
+          ctx.fillStyle = `hsl(${Math.random()*360},100%,50%)`;
+          ctx.fillRect(p.x, p.y, 3, 3);
+        });
+      }
+    }
+
+    let fireworks = [];
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (Math.random() < 0.05) {
+        fireworks.push(new Firework(Math.random() * canvas.width, Math.random() * canvas.height/2));
+      }
+      fireworks.forEach(f => { f.update(); f.draw(); });
+      fireworks = fireworks.filter(f => f.particles.length > 0);
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+
+</body>
+</html>
